@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title></title>
+	<link href="/static/css/bootstrap.min.css" rel="stylesheet" media="screen">
+</head>
+<body>
+
+<img src="/static/{{exam.exam_photo}}" width="150px" height="100px"  class="img-polaroid"/><br />
+<a  data-toggle="modal" href="#myModal" >关于我</a>
+
+<!--
+{%for question in contacts%}
+
+{{question.id}}
+{{question.question_topic}}<br />
+
+   {% if contacts.has_next %}
+        <a href="?page={{ contacts.next_page_number }}" value=a name="ans">A:{{question.a}}<br /></a>
+        <a href="?page={{ contacts.next_page_number }}" value=b name="ans">B:{{question.b}}<br /></a>
+        <a href="?page={{ contacts.next_page_number }}" value=c name="ans">C:{{question.c}}<br /></a>
+   
+   {%else%}
+    <a href="/index/">A:{{question.a}}<br /></a>
+        <a href="/index/">B:{{question.b}}<br /></a>
+        <a href="/index/">C:{{question.c}}<br /></a>
+    
+    {%endif%}
+{%endfor%}
+-->
+<div id="question_topic"></div>
+<div>
+        <li><input type="radio" name="ans" value="a" id="id_a" />A.<span id="a"></span></li>  
+        <li><input type="radio" name="ans" value="b" id="id_b" />B.<span id="b"></span></li> 
+        <li><input type="radio" name="ans" value="c" id="id_c" />C.<span id="c"></span></li>       
+</div>
+   
+<div class="modal" id="myModal">
+                     <div class="modal-header">
+                        <a class="close" data-dismiss="modal">×</a>
+                        <h3 id="fenshu"></h3>
+                      </div>
+                    <div class="modal-body">
+                    <p>这是一个参加活动的平台，在2013.5.7由MrMa指导FengZiZhang开发完成，给喜欢热闹，爱玩，爱生活的你一个空间</p>
+                    </div>
+                   <div class="modal-footer">
+                    <p>谢谢您的支持</p>
+                   </div>
+                </div>   
+   
+<script type="text/javascript" >
+quest = eval('('+"{{quest|escapejs}}"+')')
+
+var question_topic = document.getElementById('question_topic')
+var a = document.getElementById('a')
+var b = document.getElementById('b')
+var c = document.getElementById('c')
+var ans = document.getElementsByName('ans');
+var qid = 0;
+var n = 0;
+document.getElementById('id_a').onclick=next;
+document.getElementById('id_b').onclick=next;
+document.getElementById('id_c').onclick=next;
+
+//保存用户选的选项
+function saveAns(){
+ for(var i=0;i<ans.length;i++){
+  if(ans[i].checked){
+quest[qid].ans = ans[i].value;
+//alert(quest[qid].ans)
+}
+}
+}
+
+//翻页
+fenshu = document.getElementById('fenshu')
+function next(){
+saveAns();
+qid++;
+
+if(qid > quest.length - 1){
+//qid = quest.length - 1
+
+grade();
+fenshu.innerHTML = '您的分数是：' + n;
+alert(n);
+}
+
+setVal();
+}
+
+//给题目赋值
+function setVal(){
+for(i=0;i<ans.length;i++){
+ans[i].checked = false;
+if(ans[i].value == quest[qid].ans){
+ans[i].checked = true;
+}
+}
+question_topic.innerHTML = quest[qid].question_topic;
+a.innerHTML = quest[qid].a;
+b.innerHTML = quest[qid].b;
+c.innerHTML = quest[qid].c;
+
+}
+
+//分数
+function grade(){
+for(var i=0;i<quest.length;i++){
+//alert(i);
+answer = quest[i].answer;
+//alert(answer);
+//alert(quest[i].ans)
+if(answer == quest[i].ans){
+n += 30;
+};
+};
+return false;
+}
+
+grade();
+setVal();
+</script>
+ 
+
+
+<script src="/static/js/jquery-1.9.1.min.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+$('#myModal').modal({
+    backdrop:true,
+    keyboard:false,
+    show:true
+    });
+$('#myModal').modal('show')
+$('#myModal').modal('hide')
+</script>
+</body>
+</html>
