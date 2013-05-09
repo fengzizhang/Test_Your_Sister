@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title></title>
+	<link href="/static/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<link href="/static/css/datepicker.css" rel="stylesheet" media="screen">	
+<style>
+body{
+   background-image:url('');
+
+}
+
+</style>	
+	
+</head>
+<body >
+
+<div class="modal" id="myModal">
+                     <div class="modal-header">
+                        <a class="close" data-dismiss="modal">×</a>
+                        <h3 id="days"></h3>
+                      </div>
+                    <div class="modal-body">
+                    <p>这是一个参加活动的平台，在2013.5.7由MrMa指导FengZiZhang开发完成，给喜欢热闹，爱玩，爱生活的你一个空间</p>
+                    </div>
+                   <div class="modal-footer">
+                    <p>谢谢您的支持</p>
+                   </div>
+                </div>   
+
+
+
+
+<h2 style="color:blue"> {{exam.exam_topic}} </h2>	
+<h4>{{exam.exam_descript}}</h4>
+
+<form method="post">
+<!--<input type="text" name="year" style="width:60px" >年<input type="text" name="month" style="width:60px" >月<input type="text" name="day" style="width:60px" >日-->
+<div class="input-append date" id="dp5" data-date="" data-date-format="mm-dd-yyyy">
+ <input class="span2" size="16" type="text" name="time">
+ <span class="add-on"><i class="icon-th"></i></span>
+</div>
+<button class="btn btn-large btn-primary" type="submit" id="chakan" onclick="score()">查看结果</button>
+
+</form>
+
+<div id="jieguo" >你已经活了{{all_days}}天</div>
+
+
+
+
+<script src="/static/js/jquery-1.9.1.min.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+<script src="/static/js/bootstrap-datepicker.js" ></script>
+<script type="text/javascript" >
+document.getElementById('jieguo').style.display = "none";
+function score(){
+      document.getElementById('jieguo').style.display = "block";
+      
+      document.getElementById('days').innerHTML = '您活了' + {{all_days}} + '天'
+$('#myModal').modal('show');
+}
+
+$("#dp5").datepicker({
+    formate:'mm-dd-yyyy'
+});
+
+/*$('#dp5').datepicker();
+$('.datepicker').datepicker();
+
+$('#dp5').datepicker()
+  .on('changeDate', function(ev){
+ if (ev.date.valueOf() < startDate.valueOf()){
+      var newDate = new Date(ev.date)
+      newDate.setDate(newDate.getDate() + 1);
+     checkout.setValue(newDate);     
+  }
+  });*/
+
+</script>
+<script type="text/javascript">
+$('#myModal').modal({
+    backdrop:true,
+    keyboard:false,
+    show:true
+    });
+$('#myModal').modal('hide')
+</script>
+</body>
+</html>

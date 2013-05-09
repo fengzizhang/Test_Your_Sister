@@ -8,12 +8,12 @@ from django.core.paginator import Paginator,EmptyPage,InvalidPage,PageNotAnInteg
 
 
 '''常识测试主页'''
-def index(request):
+def exam_a(request):
     exams = Exam_a.objects.all()
-    return render_to_response('index.html',locals())
+    return render_to_response('exam_a.html',locals())
 
 '''具体测试页面'''
-def exam_info(request,eid):
+def exam_a_info(request,eid):
     exam = Exam_a.objects.get(id=eid)
     questions = exam.exam_a_question_set.all()
     questions_list=[]
@@ -29,12 +29,4 @@ def exam_info(request,eid):
 })    
     quest = json.dumps(questions_list)
 
-    p     = Paginator(questions,1)
-    page  = request.GET.get('page')
-    try:
-        contacts = p.page(page)
-    except PageNotAnInteger:
-        contacts = p.page(1)
-    except EmptyPage:
-        contacts = p.page(paginator.num_pages)
-    return render_to_response('exam_info.html',locals())
+    return render_to_response('exam_a_info.html',locals())

@@ -9,7 +9,6 @@
 <body>
 
 <img src="/static/{{exam.exam_photo}}" width="150px" height="100px"  class="img-polaroid"/><br />
-<a  data-toggle="modal" href="#myModal" id="wo" onclick="ww">关于我</a>
 
 
 <div id="question_topic"></div>
@@ -57,7 +56,6 @@ quest[qid].ans = ans[i].value;
 }
 }
 }
-
 //翻页
 fenshu = document.getElementById('fenshu')
 function next(){
@@ -69,8 +67,7 @@ if(qid > quest.length - 1){
 
 grade();
 fenshu.innerHTML = '您的分数是：' + n;
-//alert(n);
-//document.getElementById('wo').onclick="location.href='#myModal'";
+$('#myModal').modal('show');
 }
 
 setVal();
@@ -91,7 +88,7 @@ c.innerHTML = quest[qid].c;
 
 }
 
-//分数
+ 
 function grade(){
 for(var i=0;i<quest.length;i++){
 //alert(i);
@@ -109,7 +106,6 @@ setVal();
 </script>
 
 
-
 <script src="/static/js/jquery-1.9.1.min.js"></script>
 <script src="/static/js/bootstrap.min.js"></script>
 <script type="text/javascript">
@@ -118,7 +114,6 @@ $('#myModal').modal({
     keyboard:false,
     show:true
     });
-$('#myModal').modal('show')
 $('#myModal').modal('hide')
 </script>
 </body>

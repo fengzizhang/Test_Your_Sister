@@ -6,6 +6,7 @@ class Exam_a(models.Model):
     exam_topic = models.CharField(max_length=200) #测试游戏名字
     exam_descript = models.TextField()   #测试游戏描述
     exam_photo = models.FileField(upload_to='./exam_photo') #测试游戏照片
+    #exam_picture = models.FileField(upload_to='./exam_picture') #测试游戏图片
    
     def __unicode__(self):
     	return self.exam_topic
