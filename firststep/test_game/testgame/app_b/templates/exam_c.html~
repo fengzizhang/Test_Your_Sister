@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<title></title>
+</head>
+<body>
+{% extends 'index.html'%}
+{% block content %}
+<div class="row-fluid" style="margin-left:220px">
+<div class="span2"><img src="/static/images/logo1.png" alt=""  width="150px" height="150px" class="img-polaroid"></div>
+<div class="span4" style="margin-top:90px;margin-left:-10px" ><h2>开心萌妹子 "测" &nbsp;"测" &nbsp;"测" </h2></div>
+</div>
+<hr />
+<div class="row-fluid">
+{%for exam in exams%}
+<div class="span2">
+<a href="/exam_c_info/{{exam.id}}/" ><img src="/static/{{exam.exam_photo}}" width="200px" height="200px"><br />
+{{exam.exam_topic}}</a></div>
+{%endfor%}
+
+<div class="modal" id="myModal">
+                     <div class="modal-header">
+                        <a class="close" data-dismiss="modal">×</a>
+                        <h3>测你妹啊来历</h3>
+                      </div>
+                    <div class="modal-body">
+                    <p>这是一个测试游戏的平台，由于你妹一词的影响而取此名</p>
+                    </div>
+                   <div class="modal-footer">
+                    <p>谢谢您的支持</p>
+                   </div>
+                </div>
+
+<script src="/static/js/jquery-1.9.1.min.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+$('#myModal').modal({
+    backdrop:true,
+    keyboard:false,
+    show:true
+    });
+$('#myModal').modal('show')
+$('#myModal').modal('hide')
+</script>
+{% endblock %}
+ </div>
+</body>
+</html>

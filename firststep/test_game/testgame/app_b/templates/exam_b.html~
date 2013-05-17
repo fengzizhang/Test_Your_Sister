@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title></title>
+	<style>
+
+	
+	
+	</style>
+</head>
+<body>
+{% extends 'index.html'%}
+{% block content %}
+<div class="row" style="margin-left:220px;">
+<div class="span2"><img src="/static/images/logo2.jpg" alt=""  width="150px" height="150px" class="img-polaroid"></div>
+<div class="span5" style="margin-top:90px;margin-left:-10px" ><h2>友趣萌妹子 "测" &nbsp;"测" &nbsp;"测" </h2></div>
+</div>
+<hr / >
+
+<div class="row" style="margin-left:180px">
+
+{%for exam in exams%}
+
+<a href="/exam_b_info/{{exam.id}}" ><div class="span3" style="border:1px solid white;width:230px;height:230px;margin-top:10px;margin-left:50px;">
+		<div style="width:180px;"><img src="/static/{{exam.exam_photo}}" alt="" width="180px" style="margin-top:10px;margin-left:20px;" /></div>
+		<h5 style="margin-left:30px;">{{exam.exam_topic}}</h5>
+</div></a>
+{%endfor%}
+</div>
+
+<div class="modal" id="myModal">
+                     <div class="modal-header">
+                        <a class="close" data-dismiss="modal">×</a>
+                        <h3>测你妹啊来历</h3>
+                      </div>
+                    <div class="modal-body">
+                    <p>这是一个测试游戏的平台，由于你妹一词的影响而取此名,此应用由CNM_CREW开发制作，这只是我们的第一个版本，今后还会不断更新。CNM_CREW初来乍到，希望前辈们，用户们多多支持，有什么好的建议可以联系我们，再次谢谢大家，祝大家天天开心。</p>
+                    </div>
+                   <div class="modal-footer">
+                    <p>谢谢您的支持</p>
+                   </div>
+                </div>
+
+<script src="/static/js/jquery-1.9.1.min.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+$('#myModal').modal({
+    backdrop:true,
+    keyboard:false,
+    show:true
+    });
+$('#myModal').modal('show')
+$('#myModal').modal('hide')
+</script>
+
+{% endblock %}
+</body>
+</html>

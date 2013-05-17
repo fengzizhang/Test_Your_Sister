@@ -5,40 +5,97 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title></title>
 	<link href="/static/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<style>
+	#main{
+	width: 800px;
+	margin: 0 auto;
+	border:0px blank solid;	
+	}	
+	div.none {
+           	list-style-type: none;
+            font-size: 20px;	
+	         margin-top: 50px;
+	         margin-left: 100px;
+	         
+	}	
+	#question_topic{
+           font-size: 25px;
+            margin-top: 50px;
+            margin-left: 100px;	
+	}
+	#question_id{
+	    margin-top: 10px;
+       margin-left: -60px;
+       font-size: 30px;
+       color: #9932cc;  	
+	}
+	#total{
+	    margin-top: 20px;
+       margin-left: -60px;
+       font-size: 30px;
+       color:  #9932cc;	
+	}
+	</style>
 </head>
 <body>
+{% extends 'index.html'%}
+{% block content %}
 
-<img src="/static/{{exam.exam_photo}}" width="150px" height="100px"  class="img-polaroid"/><br />
-
-
+<img src="/static/{{exam.exam_picture}}" width="55%"   class="img-polaroid" style="height:200px;margin-left:300px"><br />
+<div id="main" style="margin-left:355px">
+<div id="question_id"></div>
+<div id="total"></div>
 <div id="question_topic"></div>
-<div>
-        <li><input type="radio" name="ans" value="a" id="id_a" />A.<span id="a"></span></li>  
-        <li><input type="radio" name="ans" value="b" id="id_b" />B.<span id="b"></span></li> 
-        <li><input type="radio" name="ans" value="c" id="id_c" />C.<span id="c"></span></li>       
+<div class="none">
+        <li style="background-color:pink;width:400px;height:30px;"><input type="radio" name="ans" value="a" id="id_a">A.<span id="a"></span></li><br /><br />  
+        <li style="background-color:pink;width:400px;height:30px;"><input type="radio" name="ans" value="b" id="id_b" />B.<span id="b"></span></li><br /><br /> 
+        <li style="background-color:pink;width:400px;height:30px;"><input type="radio" name="ans" value="c" id="id_c" />C.<span id="c"></span></li>
+               
 </div>
-   
-<div class="modal" id="myModal">
+
+<div class="modal" id="myModal1">
                      <div class="modal-header">
                         <a class="close" data-dismiss="modal">×</a>
                         <h3 id="fenshu"></h3>
+                        <h3 id="rank"></h3>
+                         <img src='' id="img1" />
                       </div>
-                    <div class="modal-body">
-                    <p>这是一个参加活动的平台，在2013.5.7由MrMa指导FengZiZhang开发完成，给喜欢热闹，爱玩，爱生活的你一个空间</p>
+                   <div class="modal-body">
+                    
+                   
+                    <p id="descript"></p>
                     </div>
                    <div class="modal-footer">
                     <p>谢谢您的支持</p>
                    </div>
                 </div>   
-   
+                
+<div class="modal" id="myModal">
+                     <div class="modal-header">
+                        <a class="close" data-dismiss="modal">×</a>
+                        <h3>测你妹啊来历</h3>
+                      </div>
+                    <div class="modal-body">
+                    <p>这是一个测试游戏的平台，由于你妹一词的影响而取此名</p>
+                    </div>
+                   <div class="modal-footer">
+                    <p>谢谢您的支持</p>
+                   </div>
+                </div>              
+                
+  
 <script type="text/javascript" >
 quest = eval('('+"{{quest|escapejs}}"+')')
+opt = eval('('+"{{opt|escapejs}}"+')')
+
 
 var question_topic = document.getElementById('question_topic')
 var a = document.getElementById('a')
 var b = document.getElementById('b')
 var c = document.getElementById('c')
 var ans = document.getElementsByName('ans');
+var question_id = document.getElementById('question_id')
+document.getElementById('total').innerHTML = '共' + quest.length  +  '题'
 
 var qid = 0;
 var n = 0;
@@ -67,7 +124,7 @@ if(qid > quest.length - 1){
 
 grade();
 fenshu.innerHTML = '您的分数是：' + n;
-$('#myModal').modal('show');
+ranks();
 }
 
 setVal();
@@ -85,7 +142,7 @@ question_topic.innerHTML = quest[qid].question_topic;
 a.innerHTML = quest[qid].a;
 b.innerHTML = quest[qid].b;
 c.innerHTML = quest[qid].c;
-
+question_id.innerHTML = '第' + quest[qid].id + '题'
 }
 
  
@@ -96,12 +153,26 @@ answer = quest[i].answer;
 //alert(answer);
 //alert(quest[i].ans)
 if(answer == quest[i].ans){
-n += 30;
+n += 20;
 };
 };
 }
 grade();
 setVal();
+
+function ranks(){
+for(i=0;i<opt.length;i++){
+if(opt[i].score_min <= n && n<=opt[i].score_max){
+    document.getElementById('rank').innerHTML = opt[i].option_topic;
+    document.getElementById('descript').innerHTML = opt[i].option_descript; 
+    document.getElementById('img1').src = opt[i].option_photo; 
+    s =  document.getElementById('img1').src.substr(30);      
+    //alert(s);
+    document.getElementById('img1').src= s;
+}
+}
+    $('#myModal1').modal('show');
+}
 
 </script>
 
@@ -109,12 +180,24 @@ setVal();
 <script src="/static/js/jquery-1.9.1.min.js"></script>
 <script src="/static/js/bootstrap.min.js"></script>
 <script type="text/javascript">
+$('#myModal1').modal({
+    backdrop:true,
+    keyboard:false,
+    show:true
+    });
+$('#myModal1').modal('hide')
+
+
 $('#myModal').modal({
     backdrop:true,
     keyboard:false,
     show:true
     });
+$('#myModal').modal('show')
 $('#myModal').modal('hide')
 </script>
+
+</div>
+{% endblock %}
 </body>
 </html>

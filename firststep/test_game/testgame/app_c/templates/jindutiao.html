@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="viewport" content="width=device-width"> 
+  <link rel="stylesheet" href="stylesheets/ui.css">
+  <link rel="stylesheet" href="stylesheets/ui.progress-bar.css">
+  <link media="only screen and (max-device-width: 480px)" href="stylesheets/ios.css" type="text/css" rel="stylesheet" />
+</head>
+<body>  
+  <div id="container">  
+    <div class="content">
+      <h1></h1>
+    </div>
+    <div id="progress_bar" class="ui-progress-bar ui-container">
+      <div class="ui-progress" style="width: 79%;">
+        <span class="ui-label" style="display:none;"><b class="value">79%</b></span>
+      </div>
+    </div>    
+  </div>  
+  <script src="javascripts/jquery.js" type="text/javascript" charset="utf-8"></script>
+  <script src="javascripts/progress.js" type="text/javascript" charset="utf-8"></script>
+</div>
+  </div><p id="sy">剩余时间(秒)：</p>
+  <div id="myclock"><input type="button" id="clock" value="start" onclick="starter()"/>
+      <div>
+          <span>时间20秒</span></div></div>
+  <script type="text/javascript" >
+
+      i=20;
+      var clock = document.getElementById("myclock");
+      function s(){
+          clock.innerHTML =i; i=i-1;
+          if(i==0){
+
+
+              document.getElementById("myclock").style.display = 'none';
+              document.getElementById("sy").style.display = 'none';
+
+          }
+
+      }
+      function starter(){
+          i=20;   c1 = setInterval("s()",1000);
+
+          document.getElementById('sy').style.display = 'block';
+      }
+  </script>
+</body>
+</html>
